@@ -1,19 +1,22 @@
-const child = require('child_process');
 const browserSync = require('browser-sync').create();
-import del from 'del';
+import child      from 'child_process';
+import del        from 'del';
+import cssnano    from 'gulp-cssnano';
+import gulp       from 'gulp';
+import gulpif     from 'gulp-if';
+import gutil      from 'gulp-util';
+import postcss    from 'gulp-postcss';
+import sass       from 'gulp-sass';
+import changed    from 'gulp-changed';
 
-const gulp = require('gulp');
-const gutil = require('gulp-util');
-const sass = require('gulp-sass');
-import changed from 'gulp-changed';
-
-
-import config  from './_config';
-
+import config     from './config';
+const production = !!gutil.env.production;
 
 gulp.task('css', () => {
   gulp.src(config.css.src)
     .pipe(sass())
+    .pipe(postcss(config.css.postcss))
+    .pipe(gulpif(production, cssnano()))
     .pipe(gulp.dest(config.css.dest));
 });
 

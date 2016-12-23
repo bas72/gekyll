@@ -1,2 +1,12 @@
 h1 {
-  color: orange; }
+  color: blue; }
+
+html {
+  color: red;
+  background: black;
+  color: red; }
+
+div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }

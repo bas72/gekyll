@@ -30,7 +30,9 @@ exclude:
   - node_modules
   - Gemfile
   - Gemfile.lock
-  - gulpConfig.js
+  - config.js
+  - development.js
+  - production.js
   - Gulpfile.babel.js
   - package.json
   - README.md
