@@ -63,5 +63,6 @@ gulp.task('clean', (done) => {
 });
 
 gulp.task('default', gulp.series(
+  'clean',
   gulp.parallel('css', 'jekyll', 'serve'),
 ));
