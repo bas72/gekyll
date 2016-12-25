@@ -43,7 +43,7 @@ gulp.task('jekyll', () => {
   jekyll.stderr.on('data', jekyllLogger);
 });
 
-gulp.task('serve', () => {
+gulp.task('serve', (done) => {
   browserSync.init({
     // files: [config.output + '/**'],
     files: ['_site/**'],
@@ -55,6 +55,7 @@ gulp.task('serve', () => {
   });
 
   gulp.watch(config.css.src, gulp.series('css'));
+  done();
 });
 
 gulp.task('clean', (done) => {
