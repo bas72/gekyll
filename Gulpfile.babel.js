@@ -17,7 +17,7 @@ const messages = { jekyllBuild: '<span style="color: grey">Running:</span> $ jek
 
 gulp.task('css', (done) => {
   gulp.src(config.css.src)
-    .pipe(sass())
+    .pipe(sass().on('error', sass.logError))
     .pipe(postcss(config.css.postcss))
     .pipe(gulpif(production, cssnano()))
     .pipe(gulp.dest(config.output + config.css.dest))
