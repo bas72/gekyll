@@ -51,6 +51,7 @@ gulp.task('serve', (done) => {
     server: {
       baseDir:'_site'
     },
+    port: 4000,
     open: false
   });
   done();
