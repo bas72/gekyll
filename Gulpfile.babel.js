@@ -22,15 +22,22 @@ gulp.task('css', (done) => {
     .pipe(gulpif(production, cssnano()))
     .pipe(gulp.dest(config.output + config.css.dest))
     .pipe(bs.stream())
-    .pipe(gulp.dest(config.css.dest))
+    .pipe(gulp.dest(config.css.dest));
     done();
 });
 
-gulp.task('images', () => {
+gulp.task('js', (done) => {
+  gulp.src(config.js.src)
+    .pipe(gulp.dest(config.js.dest));
+    done();
+});
+
+gulp.task('images', (done) => {
   gulp.src(config.images.src)
     .pipe(changed(config.images.dest)) // Ignore unchanged files
     .pipe(gulp.dest(config.images.dest))
     .pipe(bs.stream());
+    done();
 });
 
 gulp.task('jekyll-build', (done) => {
@@ -59,17 +66,18 @@ gulp.task('serve', (done) => {
 
 gulp.task('watch', (done) => {
   gulp.watch(config.css.src, gulp.series('css'));
-  gulp.watch(['_data/*', '_includes/*', '_layouts/*', '_pages/*', '_posts/*'], gulp.series('jekyll-build', 'serve-reload'))
+  gulp.watch(config.js.src, gulp.series('js'));
+  gulp.watch(['_data/*', '_includes/*', '_layouts/*', '_pages/*', '_posts/*'], gulp.series('jekyll-build', 'serve-reload'));
   done();
 });
 
 gulp.task('clean', (done) => {
-  del.sync(config.output)
+  del.sync(config.output);
   done();
 });
 
 gulp.task('default', gulp.series(
   'clean',
-  gulp.parallel('jekyll-build', 'css'),
+  gulp.parallel('jekyll-build', 'css', 'js', 'images'),
   gulp.parallel('watch', 'serve')
 ));

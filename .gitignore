@@ -2,7 +2,8 @@
 # Created by https://www.gitignore.io/api/jekyll,node,macos
 
 ### User ###
-
+assets
+images
 
 ### Jekyll ###
 _site/
